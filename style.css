@@ -1,0 +1,182 @@
+:root {
+  --board-bg: #bbada0;
+  --cell-bg: #cdc1b4;
+  --text-dark: #776e65;
+  --text-light: #f9f6f2;
+  --page-bg: #faf8ef;
+  --gap: 12px;
+  --tile-size: 100px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--page-bg);
+  font-family: "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
+  color: var(--text-dark);
+}
+
+.wrap {
+  width: min(94vw, 480px);
+  margin: 24px auto;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: 2.4rem;
+  margin: 0;
+  color: #776e65;
+}
+
+.scorebox { display: flex; gap: 8px; }
+
+.score-tile {
+  background: var(--board-bg);
+  border-radius: 6px;
+  padding: 8px 14px;
+  text-align: center;
+  color: var(--text-light);
+  min-width: 56px;
+}
+
+.score-tile .label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.score-tile div:last-child:not(.label) { font-size: 1.2rem; font-weight: bold; }
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.bar p { margin: 0; font-size: 0.95rem; }
+
+#new-game {
+  background: #8f7a66;
+  color: var(--text-light);
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#new-game:hover { background: #9f8b76; }
+
+.board-container {
+  position: relative;
+}
+
+.board {
+  position: relative;
+  background: var(--board-bg);
+  border-radius: 8px;
+  padding: var(--gap);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: var(--gap);
+  aspect-ratio: 1 / 1;
+}
+
+.cell {
+  background: rgba(238, 228, 218, 0.35);
+  border-radius: 6px;
+}
+
+.tile {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 2rem;
+  background: var(--cell-bg);
+  color: var(--text-dark);
+  transition: top 0.18s ease-in-out, left 0.18s ease-in-out;
+  z-index: 2;
+}
+
+.tile.new { animation: pop 0.15s ease; }
+.tile.merged { animation: pop 0.15s ease; z-index: 3; }
+
+@keyframes pop {
+  0% { transform: scale(0.5); }
+  70% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.tile[data-value="2"] { background: #eee4da; }
+.tile[data-value="4"] { background: #ede0c8; }
+.tile[data-value="8"] { background: #f2b179; color: var(--text-light); }
+.tile[data-value="16"] { background: #f59563; color: var(--text-light); }
+.tile[data-value="32"] { background: #f67c5f; color: var(--text-light); }
+.tile[data-value="64"] { background: #f65e3b; color: var(--text-light); }
+.tile[data-value="128"] { background: #edcf72; color: var(--text-light); font-size: 1.7rem; }
+.tile[data-value="256"] { background: #edcc61; color: var(--text-light); font-size: 1.7rem; }
+.tile[data-value="512"] { background: #edc850; color: var(--text-light); font-size: 1.7rem; }
+.tile[data-value="1024"] { background: #edc53f; color: var(--text-light); font-size: 1.4rem; }
+.tile[data-value="2048"] { background: #edc22e; color: var(--text-light); font-size: 1.4rem; }
+
+.message {
+  position: absolute;
+  inset: 0;
+  background: rgba(238, 228, 218, 0.85);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  z-index: 10;
+}
+
+.message.hidden { display: none; }
+
+.message p {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+#try-again {
+  background: #8f7a66;
+  color: var(--text-light);
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hint {
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 14px;
+}
+
+@media (max-width: 420px) {
+  h1 { font-size: 1.8rem; }
+  .tile { font-size: 1.4rem; }
+  .tile[data-value="128"], .tile[data-value="256"], .tile[data-value="512"] { font-size: 1.2rem; }
+  .tile[data-value="1024"], .tile[data-value="2048"] { font-size: 1rem; }
+}

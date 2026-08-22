@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2048</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>2048</h1>
+      <div class="scorebox">
+        <div class="score-tile">
+          <div class="label">Score</div>
+          <div id="score">0</div>
+        </div>
+        <div class="score-tile">
+          <div class="label">Best</div>
+          <div id="best">0</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="bar">
+      <p>Join the numbers to reach <strong>2048</strong>!</p>
+      <button id="new-game">New Game</button>
+    </div>
+
+    <div class="board-container">
+      <div id="board" class="board"></div>
+      <div id="message" class="message hidden">
+        <p id="message-text"></p>
+        <button id="try-again">Try Again</button>
+      </div>
+    </div>
+
+    <p class="hint">Use arrow keys or swipe to move tiles.</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

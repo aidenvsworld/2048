@@ -10,9 +10,16 @@
 
 * { box-sizing: border-box; }
 
+html, body {
+  height: 100%;
+  overscroll-behavior: none;
+}
+
 body {
   margin: 0;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,7 +30,9 @@ body {
 
 .wrap {
   width: min(94vw, 480px);
-  margin: 24px auto;
+  max-height: 96dvh;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 header {
@@ -81,6 +90,7 @@ h1 {
 
 .board-container {
   position: relative;
+  touch-action: none;
 }
 
 .board {

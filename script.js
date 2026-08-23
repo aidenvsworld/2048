@@ -6,6 +6,7 @@ const scoreEl = document.getElementById("score");
 const bestEl = document.getElementById("best");
 const messageEl = document.getElementById("message");
 const messageTextEl = document.getElementById("message-text");
+const loseGifEl = document.getElementById("lose-gif");
 const newGameBtn = document.getElementById("new-game");
 const tryAgainBtn = document.getElementById("try-again");
 const hardModeToggle = document.getElementById("hard-mode");
@@ -67,6 +68,8 @@ function startGame() {
   gameOver = false;
   animating = false;
   messageEl.classList.add("hidden");
+  loseGifEl.classList.add("hidden");
+  loseGifEl.removeAttribute("src");
 
   if (!boardEl.querySelector(".cell")) {
     for (let i = 0; i < SIZE * SIZE; i++) {
@@ -205,7 +208,7 @@ function move(direction) {
       return;
     }
     if (!movesAvailable()) {
-      showMessage("Game over");
+      showMessage("Game over", true);
       gameOver = true;
     }
   }, ANIMATION_MS);
@@ -223,8 +226,15 @@ function movesAvailable() {
   return false;
 }
 
-function showMessage(text) {
+function showMessage(text, isLoss) {
   messageTextEl.textContent = text;
+  if (isLoss) {
+    loseGifEl.src = `https://cataas.com/cat/gif?t=${Date.now()}`;
+    loseGifEl.classList.remove("hidden");
+  } else {
+    loseGifEl.classList.add("hidden");
+    loseGifEl.removeAttribute("src");
+  }
   messageEl.classList.remove("hidden");
 }
 

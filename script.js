@@ -281,6 +281,7 @@ tryAgainBtn.addEventListener("click", startGame);
 hardModeToggle.addEventListener("change", () => {
   hardMode = hardModeToggle.checked;
   document.body.classList.toggle("dark-mode", hardMode);
+  startGame();
 });
 window.addEventListener("resize", () => {
   for (let r = 0; r < SIZE; r++) {

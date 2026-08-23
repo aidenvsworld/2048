@@ -76,6 +76,29 @@ h1 {
 
 .bar p { margin: 0; font-size: 0.95rem; }
 
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hard-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.hard-mode-toggle input {
+  accent-color: #8f7a66;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
 #new-game {
   background: #8f7a66;
   color: var(--text-light);

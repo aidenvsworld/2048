@@ -8,6 +8,7 @@ const messageEl = document.getElementById("message");
 const messageTextEl = document.getElementById("message-text");
 const newGameBtn = document.getElementById("new-game");
 const tryAgainBtn = document.getElementById("try-again");
+const hardModeToggle = document.getElementById("hard-mode");
 
 const vectors = {
   left: { dr: 0, dc: -1 },
@@ -23,6 +24,7 @@ let best = Number(localStorage.getItem("2048-best") || 0);
 let won = false;
 let gameOver = false;
 let animating = false;
+let hardMode = false;
 
 bestEl.textContent = best;
 
@@ -194,6 +196,7 @@ function move(direction) {
     });
 
     renderNewTile(spawnRandomTile());
+    if (hardMode) renderNewTile(spawnRandomTile());
     animating = false;
 
     if (won) {
@@ -265,6 +268,9 @@ boardEl.addEventListener("touchend", (e) => {
 
 newGameBtn.addEventListener("click", startGame);
 tryAgainBtn.addEventListener("click", startGame);
+hardModeToggle.addEventListener("change", () => {
+  hardMode = hardModeToggle.checked;
+});
 window.addEventListener("resize", () => {
   for (let r = 0; r < SIZE; r++) {
     for (let c = 0; c < SIZE; c++) {

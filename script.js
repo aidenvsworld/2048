@@ -60,7 +60,16 @@ function spawnRandomTile() {
   return tile;
 }
 
+function randomizePageBackground() {
+  const hue = Math.floor(Math.random() * 360);
+  const bg = document.body.classList.contains("dark-mode")
+    ? `hsl(${hue}, 30%, 10%)`
+    : `hsl(${hue}, 45%, 94%)`;
+  document.body.style.setProperty("--page-bg", bg);
+}
+
 function startGame() {
+  randomizePageBackground();
   cells = emptyCells();
   boardEl.querySelectorAll(".tile").forEach((el) => el.remove());
   score = 0;

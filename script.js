@@ -21,13 +21,15 @@ const vectors = {
 let cells; // SIZE x SIZE array of tile objects or null
 let nextId = 1;
 let score = 0;
-let best = Number(localStorage.getItem("2048-best") || 0);
+const legacyBest = localStorage.getItem("2048-best");
+let bestNormal = Number(localStorage.getItem("2048-best-normal") || legacyBest || 0);
+let bestHard = Number(localStorage.getItem("2048-best-hard") || 0);
 let won = false;
 let gameOver = false;
 let animating = false;
 let hardMode = false;
 
-bestEl.textContent = best;
+bestEl.textContent = bestNormal;
 
 function emptyCells() {
   return Array.from({ length: SIZE }, () => Array(SIZE).fill(null));
@@ -95,11 +97,19 @@ function startGame() {
 
 function updateScore() {
   scoreEl.textContent = score;
-  if (score > best) {
-    best = score;
-    localStorage.setItem("2048-best", String(best));
+  if (hardMode) {
+    if (score > bestHard) {
+      bestHard = score;
+      localStorage.setItem("2048-best-hard", String(bestHard));
+    }
+    bestEl.textContent = bestHard;
+  } else {
+    if (score > bestNormal) {
+      bestNormal = score;
+      localStorage.setItem("2048-best-normal", String(bestNormal));
+    }
+    bestEl.textContent = bestNormal;
   }
-  bestEl.textContent = best;
 }
 
 function getCellMetrics() {
